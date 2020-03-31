@@ -10,13 +10,13 @@ twepoch = 1142974214000
 
 worker_id_bits = 5
 data_center_id_bits = 5
-max_worker_id = (-1) ^ (-1 << worker_id_bits)
-max_data_center_id = (-1) ^ (-1 << data_center_id_bits)
+max_worker_id = -1 ^ (-1 << worker_id_bits)
+max_data_center_id = -1 ^ (-1 << data_center_id_bits)
 sequence_bits = 12
 worker_id_shift = sequence_bits
 data_center_id_shift = sequence_bits + worker_id_bits
 timestamp_left_shift = sequence_bits + worker_id_bits + data_center_id_bits
-sequence_mask = (-1) ^ (-1 << sequence_bits)
+sequence_mask = -1 ^ (-1 << sequence_bits)
 
 
 def snowflake_to_timestamp(_id):
@@ -35,7 +35,7 @@ def generator(worker_id, data_center_id, sleep=lambda x: time.sleep(x/1000.0)):
 
     while True:
         timestamp = int(round(time.time(), 3)*1000)
-        print (timestamp)
+        
         if last_timestamp > timestamp:
             log.warning(
                 "clock is moving backwards. waiting until %i" % last_timestamp)
